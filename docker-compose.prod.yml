@@ -1,0 +1,36 @@
+# Production compose for the txDroneLog web deployment.
+# Lives on the droplet at /opt/txdronelog/docker-compose.prod.yml.
+# Builds this repo's Dockerfile so the txDroneLog rebrand is baked in.
+#
+# The container exposes ONLY 127.0.0.1:8081 — not the public internet.
+# Caddy on the droplet host proxies https://txdronelog.txdroneco.com to it.
+# Public traffic is gated by Cloudflare Access in front of Caddy.
+
+services:
+  txdronelog:
+    build: .
+    container_name: txdronelog
+    hostname: txdronelog
+    ports:
+      - "127.0.0.1:8081:80"
+    volumes:
+      - txdronelog-data:/data/drone-logbook
+    environment:
+      - DATA_DIR=/data/drone-logbook
+      - RUST_LOG=info
+      - KEEP_UPLOADED_FILES=true
+      - SESSION_TTL_HOURS=24
+      # Master password required to create new profiles inside the app.
+      # Defense-in-depth: even if someone slips past Cloudflare Access,
+      # they cannot create a profile without this.
+      - PROFILE_CREATION_PASS=${PROFILE_CREATION_PASS}
+      # Initial password for the default profile, applied only on first
+      # startup. After that the password can only be changed in-app.
+      - DEFAULT_PROFILE_PASSWORD=${DEFAULT_PROFILE_PASSWORD}
+      # Optional: your own DJI Developer API key for better rate limits.
+      # Uncomment and set in .env.prod if you have one.
+      # - DJI_API_KEY=${DJI_API_KEY}
+    restart: unless-stopped
+
+volumes:
+  txdronelog-data:

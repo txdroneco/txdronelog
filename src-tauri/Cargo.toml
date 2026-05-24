@@ -1,7 +1,7 @@
 [package]
 name = "open-dronelog"
 version = "0.1.0"
-description = "Open DroneLog — A high-performance drone flight log analyzer"
+description = "txDroneLog — A drone flight log analyzer for Texas Drone Company (fork of open-dronelog)"
 authors = ["Open DroneLog Contributors"]
 edition = "2021"
 rust-version = "1.70"

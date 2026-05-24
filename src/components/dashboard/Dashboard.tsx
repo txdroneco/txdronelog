@@ -538,7 +538,7 @@ export function Dashboard() {
             {/* Update available badge */}
             {updateStatus === 'outdated' && latestVersion && (
               <a
-                href="https://opendronelog.com"
+                href="https://txdroneco.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/30 hover:bg-amber-500/25 transition-colors cursor-pointer no-underline"

@@ -1,12 +1,12 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Open DroneLog",
-  "identifier": "com.opendronelog",
+  "productName": "txDroneLog",
+  "identifier": "com.txdroneco.txdronelog",
   "app": {
     "windows": [
       {
         "label": "main",
-        "title": "Open DroneLog",
+        "title": "txDroneLog",
         "width": 420,
         "height": 860,
         "resizable": true,
